@@ -5,6 +5,8 @@ import Header from './Header'
 import CurrencySelect from './assets/CurrencySelect'
 import CurrencyChanger from './assets/CurrencyChanger'
 import CurrencyConverter from './assets/CurrencyConverter'
+import CurrencyDropdown from './assets/CurrencyDropdown'
+
 
 function App() {
   const [count, setCount] = useState(0)
