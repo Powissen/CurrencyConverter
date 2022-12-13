@@ -52,9 +52,9 @@ function App() {
       <div className="App">
         <Header/>
         <div className='flex-container'>
-          <CurrencySelect onChange={changedSelectValue(e)}/>
+          <CurrencySelect onChange={changedSelectValue}/>
           <Converter/>
-          <CurrencySelect onChange={changedSelectValue(e)}/>
+          <CurrencySelect onChange={changedSelectValue}/>
         </div>
         <Convert onClick={getData}/>
       </div>
