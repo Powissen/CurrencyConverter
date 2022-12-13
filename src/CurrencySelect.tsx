@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-export  default function CurrencySelect(){
+export  default function CurrencySelect({onChange}){
     const [currentCurrency, setCurrentCurrency] = useState("€")
-    const [displayCurrency, setDisplayCurrency] = useState("€")
+
     function changeCurrency(e) {
         setCurrentCurrency(e.target.value)
         switch (e.target.value)
@@ -20,7 +20,7 @@ export  default function CurrencySelect(){
         <div>
             <a id="currencyName">{currentCurrency}</a>
             <br/>
-            <select value={displayCurrency} onChange={changeCurrency}>
+            <select value={currentCurrency} onChange={(e) => { onChange(e); changeCurrency(e); }}>
                 <option value="kč">CZK</option>
                 <option value="€">EUR</option>
                 <option value="$">USD</option>

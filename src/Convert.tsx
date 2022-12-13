@@ -1,11 +1,8 @@
-export  default function Convert(){
-    
-    function convert() {
-        alert('Clicked!');
-    }
+export  default function Convert({onClick}){
+
 
     return(
-        <button onClick={convert}>Convert</button>
+        <button onClick={onClick}>Convert</button>
     );
 }
 
