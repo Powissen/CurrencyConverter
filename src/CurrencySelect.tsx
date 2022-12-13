@@ -4,14 +4,16 @@ export  default function CurrencySelect({onChange}){
     const [currentCurrency, setCurrentCurrency] = useState("€")
 
     function changeCurrency(e) {
-        setCurrentCurrency(e.target.value)
         switch (e.target.value)
         {
             case "kč":
+                setCurrentCurrency("CZK");
                 break;
             case "€":
+                setCurrentCurrency("EUR");
                 break;
             case "$":
+                setCurrentCurrency("USD");
                 break;        
         }
     }
@@ -20,10 +22,10 @@ export  default function CurrencySelect({onChange}){
         <div>
             <a id="currencyName">{currentCurrency}</a>
             <br/>
-            <select value={currentCurrency} onChange={(e) => { onChange(e); changeCurrency(e); }}>
-                <option value="kč">CZK</option>
-                <option value="€">EUR</option>
-                <option value="$">USD</option>
+            <select onChange={(e) => { onChange(e); changeCurrency(e); }}>
+                <option value="CZK">CZK</option>
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
             </select>
 	    </div>
     );
