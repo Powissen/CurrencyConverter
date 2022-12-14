@@ -16,35 +16,33 @@ const options = {
 
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [dataAPI, setDataAPI] = useState({})
-
   const [currencyFrom, setCurrencyFrom] = useState("EUR");
-  const [currencyTo, setCurrencyTo] = useState("EUR");  
+  const [currencyTo, setCurrencyTo] = useState("EUR");
+  const [inputNumber, setInputNumber] = useState();
 
 
   function getData() {
-     //fetch('https://currency-conversion-and-exchange-rates.p.rapidapi.com/latest?from=USD&to=EUR%2CGBP', options)
-     //.then(response => response.json())
-     //.then(response => {
-     //  let currencyResponse = response.rates;
+     fetch('https://currency-conversion-and-exchange-rates.p.rapidapi.com/latest?from=USD&to=EUR%2CGBP', options)
+     .then(response => response.json())
+     .then(response => {
+         let currencyResponse = response.rates;
 
-
-       //let valueInEUR = document.getElementById('Number')!.value / currencyResponse[currencyFrom];
-       //let valueInEUR = 1;
-       //console.log(valueInEUR * currencyResponse[currencyTo]);
-
-
-
-       console.log("Clicked convert button");
-
-     //})
-     //.catch(err => console.error(err));
+         var valueInEUR = inputNumber / currencyResponse[currencyFrom];
+         console.log(valueInEUR * currencyResponse[currencyTo]);
+     })
+     .catch(err => console.error(err));
   }
 
-  function changedSelectValue(e) {
-    console.log("Changed select value");
-    console.log(e.target.value);
+  function changedFromCurrency(e) {
+      setCurrencyFrom(e.target.value);
+  }
+
+  function changedToCurrency(e) {
+      setCurrencyTo(e.target.value);
+  }
+
+  function changedInputValue(e) {
+      setInputNumber(e.target.value);
   }
 
   return (  
@@ -52,9 +50,9 @@ function App() {
       <div className="App">
         <Header/>
         <div className='flex-container'>
-          <CurrencySelect onChange={changedSelectValue}/>
-          <Converter/>
-          <CurrencySelect onChange={changedSelectValue}/>
+          <CurrencySelect onChange={changedFromCurrency} />
+          <Converter onChange={changedInputValue}/>
+          <CurrencySelect onChange={changedToCurrency} />
         </div>
         <Convert onClick={getData}/>
       </div>
