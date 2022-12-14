@@ -1,7 +1,4 @@
-import { useState } from "react";
-
-export default function Converter({ onChange }) {
-      const [result, setResult] = useState("0.000");
+export default function Converter({ onChange, onClick, result }) {
 
     return(
         <div>
@@ -10,7 +7,7 @@ export default function Converter({ onChange }) {
             <a>{result}</a>
             <div></div>
             <br/>
-            <a> <img src="src/exchange.png" height ="40" width="40" /> </a>
+            <a> <img src="src/exchange.png" height="40" width="40" onClick={onClick}/> </a>
         </div>
     );
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './App.css'
 import Header from './Header'
 import CurrencySelect from './CurrencySelect'
@@ -16,9 +16,10 @@ const options = {
 
 
 function App() {
-  const [currencyFrom, setCurrencyFrom] = useState("EUR");
-  const [currencyTo, setCurrencyTo] = useState("EUR");
-  const [inputNumber, setInputNumber] = useState();
+  const [currencyFrom, setCurrencyFrom] = useState("\u20AC");
+  const [currencyTo, setCurrencyTo] = useState("k\u010D");
+  const [inputNumber, setInputNumber] = useState(0);
+  const [result, setResult] = useState("0.000");
 
 
   function getData() {
@@ -27,11 +28,26 @@ function App() {
      .then(response => {
          let currencyResponse = response.rates;
 
-         var valueInEUR = inputNumber / currencyResponse[currencyFrom];
-         console.log(valueInEUR * currencyResponse[currencyTo]);
+         var valueInEUR = inputNumber / currencyResponse[getCurrencyName(currencyFrom)];
+         setResult((valueInEUR * currencyResponse[getCurrencyName(currencyTo)]).toFixed(3));
      })
      .catch(err => console.error(err));
   }
+
+    function getCurrencyName(currency) {
+        switch (currency)
+        {
+            case "€", "\u20AC":
+                return "EUR";
+            case "kè", "k\u010D":
+                return "CZK";
+            case "$", "\u0024":
+                return "USD";
+        }
+    }
+
+
+
 
   function changedFromCurrency(e) {
       setCurrencyFrom(e.target.value);
@@ -45,14 +61,20 @@ function App() {
       setInputNumber(e.target.value);
   }
 
+  function switchCurrencies() {
+      var newCurrencyFrom = currencyTo;
+      setCurrencyTo(currencyFrom);
+      setCurrencyFrom(newCurrencyFrom);
+  }
+
   return (  
     <center>
       <div className="App">
         <Header/>
         <div className='flex-container'>
-          <CurrencySelect onChange={changedFromCurrency} />
-          <Converter onChange={changedInputValue}/>
-          <CurrencySelect onChange={changedToCurrency} />
+          <CurrencySelect currentCurrency={currencyFrom} onChange={changedFromCurrency} />
+          <Converter result={result} onChange={changedInputValue} onClick={switchCurrencies}/>
+          <CurrencySelect currentCurrency={currencyTo} onChange={changedToCurrency} />
         </div>
         <Convert onClick={getData}/>
       </div>

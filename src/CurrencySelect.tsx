@@ -1,30 +1,13 @@
-import { useState } from "react";
-
-export  default function CurrencySelect({onChange}){
-    const [currentCurrency, setCurrentCurrency] = useState("€")
-
-    function changeCurrency(e) {
-        switch (e.target.value) {
-            case "EUR":
-                setCurrentCurrency("€");
-                break;
-            case "CZK":
-                setCurrentCurrency("kč");
-                break;
-            case "USD":
-                setCurrentCurrency("$");
-                break;
-        }
-    }
+export default function CurrencySelect({ onChange, currentCurrency }) {
 
     return(
         <div>
             <a>{currentCurrency}</a>
             <br/>
-            <select onChange={(e) => { onChange(e); changeCurrency(e); }}>
-                <option value="EUR">EUR</option>
-                <option value="CZK">CZK</option>
-                <option value="USD">USD</option>
+            <select value={currentCurrency} onChange={(e) => { onChange(e) }}>
+                <option value="€">EUR</option>
+                <option value="kč">CZK</option>
+                <option value="$">USD</option>
             </select>
 	    </div>
     );
