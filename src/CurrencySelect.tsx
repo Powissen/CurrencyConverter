@@ -2,7 +2,7 @@ export default function CurrencySelect({ onChange, currentCurrency }) {
 
     return(
         <div>
-            <a>{currentCurrency}</a>
+            <a id="center">{currentCurrency}</a>
             <br/>
             <select value={currentCurrency} onChange={(e) => { onChange(e) }}>
                 <option value="€">EUR</option>

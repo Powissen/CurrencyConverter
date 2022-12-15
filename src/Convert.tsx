@@ -2,7 +2,9 @@ export  default function Convert({onClick}){
 
 
     return(
-        <button onClick={onClick}>Convert</button>
+        <div id="center">
+            <button onClick={onClick}>Convert</button>
+        </div>
     );
 }
 

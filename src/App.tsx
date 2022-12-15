@@ -37,9 +37,9 @@ function App() {
     function getCurrencyName(currency) {
         switch (currency)
         {
-            case "Ä", "\u20AC":
+            case "‚Ç¨", "\u20AC":
                 return "EUR";
-            case "kË", "k\u010D":
+            case "kƒç", "k\u010D":
                 return "CZK";
             case "$", "\u0024":
                 return "USD";
@@ -68,7 +68,6 @@ function App() {
   }
 
   return (  
-    <center>
       <div className="App">
         <Header/>
         <div className='flex-container'>
@@ -78,7 +77,6 @@ function App() {
         </div>
         <Convert onClick={getData}/>
       </div>
-    </center>  
   )
 }
 
